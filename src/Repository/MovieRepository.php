@@ -16,15 +16,26 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
-    public function findAllWithCategory($category)
+    public function findAllWithCategory()
     {
         return $this->createQueryBuilder('m')
             ->innerJoin('m.category', 'c')
             ->addSelect('c')
-            ->orderBy('c.id', 'DESC')
+            ->orderBy('m.id', 'DESC')
             ->getQuery()
             ->getResult();
     }
+
+
+    public function findOneWithCategory()
+    {
+        return $this->createQueryBuilder('m')
+            ->innerJoin('m.category', 'c')
+            ->addSelect('c')
+            ->getQuery()
+            ->getResult();
+    }
+
 
     //    /**
     //     * @return Movie[] Returns an array of Movie objects
